@@ -1,0 +1,221 @@
+:root {
+    --purple-main: #7c3aed;
+    --purple-hover: #6d28d9;
+
+    --bg-dark: #0f0f1a;
+    --bg-card-dark: #16162a;
+    --text-dark: #e5e7eb;
+    --muted-dark: #9ca3af;
+
+    --bg-light: #f5f6fa;
+    --bg-card-light: #ffffff;
+    --text-light: #111827;
+    --muted-light: #6b7280;
+
+    --border-radius: 14px;
+    --transition: all .25s ease;
+}
+
+/* ================= THEME HANDLING ================= */
+body.dark {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+body.light {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+}
+
+/* ================= LIGHT MODE REFINEMENT ================= */
+
+body.light {
+    background: linear-gradient(180deg, #f3f4f6, #e5e7eb);
+}
+
+/* Card mais elegante */
+body.light .card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Título com destaque */
+body.light h3 {
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Labels mais sutis */
+body.light .form-label {
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Inputs mais modernos */
+body.light .form-control {
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+}
+
+body.light .form-control::placeholder {
+    color: #9ca3af;
+}
+
+body.light .form-control:focus {
+    background-color: #ffffff;
+    border-color: var(--purple-main);
+    box-shadow: 0 0 0 .2rem rgba(124, 58, 237, 0.2);
+}
+
+/* Botão mais elegante */
+body.light .btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+body.light .btn-primary:hover {
+    filter: brightness(1.05);
+}
+
+/* Link de login */
+body.light p a {
+    font-weight: 600;
+}
+
+
+/* ================= NAVBAR ================= */
+.navbar {
+    transition: var(--transition);
+}
+
+body.dark .navbar {
+    background-color: var(--bg-card-dark);
+    border-bottom: 1px solid #27272a;
+}
+
+body.light .navbar {
+    background-color: var(--bg-card-light);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-brand,
+.nav-link {
+    transition: var(--transition);
+}
+
+body.dark .nav-link,
+body.dark .navbar-brand {
+    color: var(--text-dark) !important;
+}
+
+body.light .nav-link,
+body.light .navbar-brand {
+    color: var(--text-light) !important;
+}
+
+.nav-link:hover {
+    color: var(--purple-main) !important;
+}
+
+/* ================= CARD ================= */
+.card {
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+body.dark .card {
+    background-color: var(--bg-card-dark);
+    border: 1px solid #27272a;
+    color: white;
+}
+
+body.light .card {
+    background-color: var(--bg-card-light);
+    border: 1px solid #e5e7eb;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card-img-wrapper {
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-img-wrapper img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 5%;
+}
+
+
+/* ================= FORM ================= */
+.form-control {
+    transition: var(--transition);
+}
+
+body.dark .form-control {
+    background-color: #0b0b14;
+    color: var(--text-dark);
+    border: 1px solid #27272a;
+}
+
+body.light .form-control {
+    background-color: #ffffff;
+    color: var(--text-light);
+    border: 1px solid #d1d5db;
+}
+
+.form-control:focus {
+    border-color: var(--purple-main);
+    box-shadow: 0 0 0 .15rem rgba(124, 58, 237, .25);
+}
+
+/* ================= BUTTON ================= */
+.btn-primary {
+    background-color: var(--purple-main);
+    border-color: var(--purple-main);
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: var(--purple-hover);
+    border-color: var(--purple-hover);
+}
+
+/* ================= LINKS ================= */
+a {
+    color: var(--purple-main);
+}
+/* ================= ALERTS ================= */
+.alert{
+    padding: 0.5rem 1rem;
+}
+
+/* ================= ANIMATION ================= */
+.fade-in {
+    animation: fadeIn .5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,66 @@
+DROP DATABASE IF EXISTS meu_pet_sumiu;
+
+CREATE DATABASE IF NOT EXISTS meu_pet_sumiu
+CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE meu_pet_sumiu;
+
+CREATE TABLE IF NOT EXISTS users(
+	id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	`password` VARCHAR(255) NOT NULL,
+	ddd VARCHAR(3) NOT NULL,
+	telefone VARCHAR(15),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP NULL DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS pets(
+	id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	user_id BIGINT UNSIGNED,
+	nome VARCHAR(255),
+	tipo ENUM('cachorro', 'gato', 'outros') NOT NULL,
+	descricao TEXT,
+	`status` ENUM('perdido', 'encontrado') NOT NULL,
+	imagem VARCHAR(255),
+	visto_por_ultimo VARCHAR(255),
+	sexo ENUM('macho','femea','desconhecido') NOT NULL,  
+    cor VARCHAR(80),
+	latitude DECIMAL(10,8),
+	longitude DECIMAL(11,8),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP NULL DEFAULT NULL,
+	FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+CREATE TABLE IF NOT EXISTS pet_contact(
+	id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	pet_id BIGINT UNSIGNED,
+	nome_contato VARCHAR(255),
+	telefone VARCHAR(15),
+	descricao TEXT,
+	FOREIGN KEY (pet_id) REFERENCES pets (id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
