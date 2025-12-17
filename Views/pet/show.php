@@ -91,7 +91,7 @@ if (isset($_SESSION['pet'])) {
                     </a>
 
                     <div class="actions col-4 d-flex justify-content-between">
-                        <a href="/pet/update" class="btn btn-outline-warning">
+                        <a href="/create_pet" class="btn btn-outline-warning">
                             Editar
                         </a>
                         <a href="/pet/delete" class="btn btn-outline-danger">

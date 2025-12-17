@@ -9,18 +9,64 @@ use PDO;
 
 class Pet extends Connection
 {
+    // cria ou atualiza o pet
     public function create(array $data, ?string $image, int $userId): void
     {
-        $sql = "INSERT INTO pets (
-                    user_id, nome, tipo, descricao, status, imagem,
-                    visto_por_ultimo, sexo, cor, latitude, longitude
-                ) VALUES (
-                    :user_id, :nome, :tipo, :descricao, :status, :imagem,
-                    :visto_por_ultimo, :sexo, :cor, :latitude, :longitude
-                )";
+        // UPDATE
+        if (isset($_SESSION['pet']['id'])) {
+
+            $sql = "
+            UPDATE pets SET
+                nome = :nome,
+                tipo = :tipo,
+                descricao = :descricao,
+                status = :status,
+                visto_por_ultimo = :visto_por_ultimo,
+                sexo = :sexo,
+                cor = :cor,
+                latitude = :latitude,
+                longitude = :longitude
+                " . ($image ? ", imagem = :imagem" : "") . "
+            WHERE id = :id AND user_id = :user_id
+        ";
+
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->bindValue(':id', $_SESSION['pet']['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+
+            $stmt->bindValue(':nome', $data['nome'] ?? null);
+            $stmt->bindValue(':tipo', $data['tipo']);
+            $stmt->bindValue(':descricao', $data['descricao'] ?? null);
+            $stmt->bindValue(':status', $data['status']);
+            $stmt->bindValue(':visto_por_ultimo', $data['visto_por_ultimo'] ?? null);
+            $stmt->bindValue(':sexo', $data['sexo']);
+            $stmt->bindValue(':cor', $data['cor'] ?? null);
+            $stmt->bindValue(':latitude', null);
+            $stmt->bindValue(':longitude', null);
+
+            if ($image) {
+                $stmt->bindValue(':imagem', $image);
+            }
+
+            $stmt->execute();
+            return;
+        }
+
+        // INSERT
+        $sql = "
+        INSERT INTO pets (
+            user_id, nome, tipo, descricao, status, imagem,
+            visto_por_ultimo, sexo, cor, latitude, longitude
+        ) VALUES (
+            :user_id, :nome, :tipo, :descricao, :status, :imagem,
+            :visto_por_ultimo, :sexo, :cor, :latitude, :longitude
+        )
+        ";
 
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':user_id', $userId);
+
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
         $stmt->bindValue(':nome', $data['nome'] ?? null);
         $stmt->bindValue(':tipo', $data['tipo']);
         $stmt->bindValue(':descricao', $data['descricao'] ?? null);
@@ -34,6 +80,7 @@ class Pet extends Connection
 
         $stmt->execute();
     }
+
 
     public function takeUserPet(int $userId): array
     {

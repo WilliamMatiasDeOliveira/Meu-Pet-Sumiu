@@ -58,9 +58,6 @@ switch ($uri) {
     case "/show_pet":
         MainController::show_pet();
         break;
-    case "/pet/update":
-        MainController::update_pet();
-        break;
     case "/pet/delete":
         echo "estou na app/delete";
         break;

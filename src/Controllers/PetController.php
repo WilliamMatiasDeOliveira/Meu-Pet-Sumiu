@@ -49,7 +49,12 @@ class PetController
         $pet = new Pet();
         $pet->create($data, $imageName, $_SESSION['user']['id']);
 
-        $_SESSION['success'] = 'Pet cadastrado com sucesso!';
+        if(isset($_SESSION['pet'])){
+             $_SESSION['success'] = 'Pet atualizado com sucesso !';
+             unset($_SESSION['pet']);
+        } else {
+            $_SESSION['success'] = 'Pet cadastrado com sucesso!';
+        }
         header("Location: /dashboard");
         exit;
     }
@@ -95,9 +100,5 @@ class PetController
         $_SESSION['pet'] = $pet;
         header("Location: /show_pet");
         exit;
-    }
-
-    public static function update(){
-        
     }
 }
