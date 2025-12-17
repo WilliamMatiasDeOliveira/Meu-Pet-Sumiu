@@ -42,4 +42,8 @@ class MainController{
     public static function show_pet(){
         self::layouts("pet/show", "Detalhes do Pet");
     }
+
+    public static function update_pet(){
+        self::layouts("pet/update", "Atualizar Pet");
+    }
 }

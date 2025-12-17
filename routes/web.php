@@ -9,10 +9,9 @@ use App\Controllers\UserController;
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace("\\", "/", $uri);
 
-if(!session_start()){
-    session_start();
-}
-
+// if(!session_start()){
+//     session_start();
+// }
 
 switch ($uri) {
     case "/":
@@ -60,14 +59,10 @@ switch ($uri) {
         MainController::show_pet();
         break;
     case "/pet/update":
-        echo "<pre>";
-        print_r($_SESSION['pet']);
-        die();
+        MainController::update_pet();
         break;
     case "/pet/delete":
-        echo "<pre>";
-        print_r($_SESSION['pet']);
-        die();
+        echo "estou na app/delete";
         break;
 }
 

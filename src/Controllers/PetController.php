@@ -96,4 +96,8 @@ class PetController
         header("Location: /show_pet");
         exit;
     }
+
+    public static function update(){
+        
+    }
 }

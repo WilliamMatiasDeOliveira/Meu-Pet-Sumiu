@@ -86,16 +86,16 @@ if (isset($_SESSION['pet'])) {
                 </div>
 
                 <div class="card-footer d-flex justify-content-between">
-                    <a href="/dashboard" class="btn btn-outline-primary">
+                    <a href="/index_pet" class="btn btn-outline-primary">
                         Voltar
                     </a>
 
                     <div class="actions col-4 d-flex justify-content-between">
-                        <a href="/pet/delete" class="btn btn-outline-danger">
-                            Excluir
-                        </a>
                         <a href="/pet/update" class="btn btn-outline-warning">
                             Editar
+                        </a>
+                        <a href="/pet/delete" class="btn btn-outline-danger">
+                            Excluir
                         </a>
                     </div>
 
