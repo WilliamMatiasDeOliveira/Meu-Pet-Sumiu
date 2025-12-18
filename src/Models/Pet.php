@@ -81,6 +81,20 @@ class Pet extends Connection
         $stmt->execute();
     }
 
+    public function delete($id): bool
+    {
+        $sql = "UPDATE pets SET deleted_at = now() WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function takeUserPet(int $userId): array
     {
@@ -114,5 +128,15 @@ class Pet extends Connection
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function pets_encontrados()
+    {
+        $sql = "SELECT * FROM pets WHERE status = :encontrado";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":encontrado", 'encontrado');
+        $stmt->execute();
+        $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $response;
     }
 }

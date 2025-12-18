@@ -42,4 +42,12 @@ class MainController{
     public static function show_pet(){
         self::layouts("pet/show", "Detalhes do Pet");
     }
+
+    public static function show_pets_encontrados(){
+        self::layouts("auth/show_pets_encontrados", "Pets encontrados");
+    }
+
+    public static function show_pets_details(){
+        self::layouts("pet/show_pets_details", "Detalhes do Pet");
+    }
 }

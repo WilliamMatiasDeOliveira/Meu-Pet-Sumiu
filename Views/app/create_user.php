@@ -3,10 +3,6 @@ if (isset($_SESSION['errors'])) {
     $errors = $_SESSION['errors'];
     unset($_SESSION['errors']);
 }
-if(isset($_SESSION['access_invalid'])){
-    $access_invalid = $_SESSION['access_invalid'];
-    unset($_SESSION['access_invalid']);
-}
 if (isset($_SESSION['user'])) {
     header("Location: /dashboard");
     exit;
@@ -23,12 +19,6 @@ if(isset($_SESSION['pssword_not_equals'])){
 <div class="container">
     <div class="row justify-content-center align-items-center min-vh-100 mt-5">
         <div class="col-md-6 col-lg-5">
-
-            <?php if(isset($access_invalid)): ?>
-                <div class="alert alert-danger text-center">
-                    <?= $access_invalid ?>
-                </div>
-            <?php endif; ?>
 
              <?php if(isset($email_exists)): ?>
                 <div class="alert alert-danger text-center">

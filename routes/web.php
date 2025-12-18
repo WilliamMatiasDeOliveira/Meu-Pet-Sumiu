@@ -9,9 +9,7 @@ use App\Controllers\UserController;
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace("\\", "/", $uri);
 
-// if(!session_start()){
-//     session_start();
-// }
+
 
 switch ($uri) {
     case "/":
@@ -59,15 +57,30 @@ switch ($uri) {
         MainController::show_pet();
         break;
     case "/pet/delete":
-        echo "estou na app/delete";
+        if (!session_start()) {
+            session_start();
+        }
+        PetController::delete($_SESSION['pet']['id']);
+        break;
+    case "/pets_encontrados":
+        PetController::show_pets_encontrados();
+        break;
+    case "/show_pets_encontrados":
+        MainController::show_pets_encontrados();
+        break;
+    case "/pet/show_encontrados":
+        $id_pet = (int) $_POST['id_pet'];
+        PetController::show_encontrados($id_pet);
+        break;
+    case "/show_pets_details":
+        MainController::show_pets_details();
         break;
 }
 
 // ROTAS DINÂMICAS (fallback)
-$uriParts = explode('/', trim($uri, '/'));
+// $uriParts = explode('/', trim($uri, '/'));
 
-if ($uriParts[0] === 'pets' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
-    PetController::show((int) $uriParts[1]);
-    exit;
-}
-
+// if ($uriParts[0] === 'pets' && isset($uriParts[1]) && is_numeric($uriParts[1])) {
+//     PetController::show((int) $uriParts[1]);
+//     exit;
+// }

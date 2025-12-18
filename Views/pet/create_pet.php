@@ -4,8 +4,8 @@ if (isset($_SESSION['errors'])) {
     unset($_SESSION['errors']);
 }
 if(!isset($_SESSION['user'])){
-    $_SESSION['access_invalid'] = "Crie sua conta para cadastrar um Pet !";
-    header("Location: /create_user");
+    $_SESSION['access_invalid'] = "Entre com a conta para acessar o sistema !";
+    header("Location: /login");
     exit;
 }
 if(isset($_SESSION['pet'])){
@@ -32,7 +32,7 @@ if(isset($_SESSION['pet'])){
 
                         <!-- Tipo -->
                         <div class="mb-3">
-                            <label class="form-label">Tipo</label>
+                            <label class="form-label">Espécie</label>
                             <select name="tipo" class="form-select">
                                 <option value="">Selecione</option>
 

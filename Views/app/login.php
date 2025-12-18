@@ -20,6 +20,10 @@ if (isset($_SESSION['user'])) {
     header("Location: /dashboard");
     exit;
 }
+if(isset($_SESSION['access_invalid'])){
+    $access_invalid = $_SESSION['access_invalid'];
+    unset($_SESSION['access_invalid']);
+}
 
 ?>
 <div class="container">
@@ -44,6 +48,12 @@ if (isset($_SESSION['user'])) {
             <?php if (isset($email_or_password_incorrectly)): ?>
                 <div class="alert alert-danger text-center">
                     <?= $email_or_password_incorrectly ?>
+                </div>
+            <?php endif; ?>
+                <!-- menssagem de erro -->
+            <?php if(isset($access_invalid)): ?>
+                <div class="alert alert-danger text-center">
+                    <?= $access_invalid ?>
                 </div>
             <?php endif; ?>
 

@@ -1,30 +1,45 @@
 <?php
-if(!isset($_SESSION['user'])){
+if (!isset($_SESSION['user'])) {
     header("Location: /login");
     exit;
 }
 
-if(isset($_SESSION['success'])){
+if (isset($_SESSION['success'])) {
     $success = $_SESSION['success'];
     unset($_SESSION['success']);
 }
 
-if(isset($_SESSION['not_pet'])){
+if (isset($_SESSION['not_pet'])) {
     $not_pet = $_SESSION['not_pet'];
     unset($_SESSION['not_pet']);
+}
+
+if (isset($_SESSION['pet'])) {
+    unset($_SESSION['pet']);
+}
+
+if (isset($_SESSION['deleted'])) {
+    $deleted = $_SESSION['deleted'];
+    unset($_SESSION['deleted']);
 }
 ?>
 <div class="container mt-5">
 
-    <?php if(isset($not_pet)): ?>
+    <?php if (isset($not_pet)): ?>
         <div class="alert alert-danger text-center">
             <?= $not_pet ?>
         </div>
     <?php endif; ?>
 
-    <?php if(isset($success)): ?>
+    <?php if (isset($success)): ?>
         <div class="alert alert-success text-center">
             <?= $success ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($deleted)): ?>
+        <div class="alert alert-danger text-center">
+            <?= $deleted ?>
         </div>
     <?php endif; ?>
 
@@ -73,11 +88,11 @@ if(isset($_SESSION['not_pet'])){
         <div class="col-md-4">
             <div class="card shadow-sm h-100">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Mensagens</h5>
+                    <h5 class="card-title">Ver todos os pets encontrados.</h5>
                     <p class="card-text">
-                        Veja contatos de pessoas que encontraram seu pet.
+                        Veja todos os Pets encontrados na sua região.
                     </p>
-                    <a href="/messages" class="btn btn-primary">
+                    <a href="/pets_encontrados" class="btn btn-primary">
                         Acessar
                     </a>
                 </div>

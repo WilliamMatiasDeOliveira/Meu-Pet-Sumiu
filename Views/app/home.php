@@ -1,4 +1,8 @@
-
+<?php
+if(isset($_SESSION['pet'])){
+    unset($_SESSION['pet']);
+}
+?>
 <div class="container mt-5 fade-in">
 
     <!-- HERO SECTION -->
@@ -20,7 +24,7 @@
                 <a href="/create_pet" class="btn btn-primary btn-lg">
                     Cadastrar Pet Perdido
                 </a>
-                <a href="/pets" class="btn btn-outline-secondary btn-lg">
+                <a href="/pets_encontrados" class="btn btn-outline-secondary btn-lg">
                     Ver Pets Encontrados
                 </a>
             </div>

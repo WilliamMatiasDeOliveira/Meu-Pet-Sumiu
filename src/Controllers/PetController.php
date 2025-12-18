@@ -49,9 +49,9 @@ class PetController
         $pet = new Pet();
         $pet->create($data, $imageName, $_SESSION['user']['id']);
 
-        if(isset($_SESSION['pet'])){
-             $_SESSION['success'] = 'Pet atualizado com sucesso !';
-             unset($_SESSION['pet']);
+        if (isset($_SESSION['pet'])) {
+            $_SESSION['success'] = 'Pet atualizado com sucesso !';
+            unset($_SESSION['pet']);
         } else {
             $_SESSION['success'] = 'Pet cadastrado com sucesso!';
         }
@@ -74,8 +74,8 @@ class PetController
 
     public static function show(int $id): void
     {
-        
-        if(!session_start()){
+
+        if (!session_start()) {
             session_start();
         }
 
@@ -83,14 +83,14 @@ class PetController
         $pet = $petModel->findById($id);
 
         // se o telefone tiver tamanho 8 adicionar "-" apos o 4° digito
-        if(strlen($pet['telefone_tutor']) == 8){
+        if (strlen($pet['telefone_tutor']) == 8) {
             $pet['telefone_tutor'] = substr($pet['telefone_tutor'], 0, 4) . '-' . substr($pet['telefone_tutor'], 4);
         } else {
             // se o telefone tiver tamanho 9 adicionar "-" apos o 5° digito
-             $pet['telefone_tutor'] = substr($pet['telefone_tutor'], 0, 5) . '-' . substr($pet['telefone_tutor'], 5);
+            $pet['telefone_tutor'] = substr($pet['telefone_tutor'], 0, 5) . '-' . substr($pet['telefone_tutor'], 5);
         }
-        
-        
+
+
         if (!$pet) {
             $_SESSION['not_pet'] = "Você ainda não possue pet cadastrado !";
             header("Location: /dashboard");
@@ -99,6 +99,67 @@ class PetController
 
         $_SESSION['pet'] = $pet;
         header("Location: /show_pet");
+        exit;
+    }
+
+    public static function delete(int $id): void
+    {
+        if (!session_start()) {
+            session_start();
+        }
+        if (isset($_SESSION['pet'])) {
+            unset($_SESSION['pet']);
+        }
+
+        $pet_delete = new Pet();
+        $response = $pet_delete->delete($id);
+
+        if ($response) {
+            $_SESSION['deleted'] = "Pet Deletado com sucesso !";
+            header("Location: /dashboard");
+            exit;
+        }
+    }
+
+    public static function show_pets_encontrados()
+    {
+        if(!session_start()){
+            session_start();
+        }
+        $pets_encontrados = new Pet();
+        $response = $pets_encontrados->pets_encontrados();
+
+        $_SESSION['pets_encontrados'] = $response;
+        header("Location: /show_pets_encontrados");
+        exit;
+    }
+
+    public static function show_encontrados(int $id)
+    {
+         if (!session_start()) {
+            session_start();
+        }
+
+        $petModel = new Pet();
+        $pet = $petModel->findById($id);
+
+        // se o telefone tiver tamanho 8 adicionar "-" apos o 4° digito
+        if (strlen($pet['telefone_tutor']) == 8) {
+            $pet['telefone_tutor'] = substr($pet['telefone_tutor'], 0, 4) . '-' . substr($pet['telefone_tutor'], 4);
+        } else {
+            // se o telefone tiver tamanho 9 adicionar "-" apos o 5° digito
+            $pet['telefone_tutor'] = substr($pet['telefone_tutor'], 0, 5) . '-' . substr($pet['telefone_tutor'], 5);
+        }
+
+
+        // if (!$pet) {
+        //     $_SESSION['not_pet'] = "Você ainda não possue pet cadastrado !";
+        //     header("Location: /dashboard");
+        //     exit;
+        // }
+
+        $_SESSION['pet'] = $pet;
+        header("Location: /show_pets_details");
         exit;
     }
 }
